@@ -11,6 +11,7 @@ import uuid
 #
 # Take a look at the documentation on what other plugin mixins are available.
 import octoprint.plugin
+import json
 
 userId = str(uuid.uuid1())[:8]
 
@@ -57,6 +58,19 @@ class MQTTControlPlugin(
             self._printer.connect()
         if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, '/disconnect'):
             self._printer.disconnect()
+        if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, '/temp/tool0'):
+            if self._printer.is_operational():
+                payload = json.loads(message)
+                if 'temp' in payload:
+                    temp = payload['temp']
+                    self._printer.set_temperature('tool0', temp)
+        if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, '/temp/bed'):
+            if self._printer.is_operational():
+                payload = json.loads(message)
+                if 'temp' in payload:
+                    temp = payload['temp']
+                    self._printer.set_temperature('bed', temp)
+
 
         # if topic == '%s%s%s' % (self.baseTopic, self.baseTopic, 'env'):
         #     payload = json.loads(message)
