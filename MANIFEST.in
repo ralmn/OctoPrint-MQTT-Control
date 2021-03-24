@@ -1,0 +1,4 @@
+include README.md
+recursive-include OctoPrint-MQTT-Control/templates *
+recursive-include OctoPrint-MQTT-Control/translations *
+recursive-include OctoPrint-MQTT-Control/static *
