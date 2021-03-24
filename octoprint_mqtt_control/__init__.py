@@ -26,7 +26,7 @@ class MQTTControlPlugin(
         self.mqtt_publish = lambda *args, **kwargs: None
         self.mqtt_subscribe = lambda *args, **kwargs: None
         self.mqtt_unsubscribe = lambda *args, **kwargs: None
- 
+
 
     def on_after_startup(self):
 
@@ -46,16 +46,22 @@ class MQTTControlPlugin(
 
         if self.baseTopic:
             self._logger.info('Enable MQTT')
-            self.mqtt_subscribe('%s%s' % (self.baseTopic, '%s/#' % self.topicPrefix), self.on_mqtt_sub)
- 
+            self.mqtt_subscribe('%s%s/#' % (self.baseTopic, self.topicPrefix), self.on_mqtt_sub)
+
     def on_mqtt_sub(self, topic, message, retain=None, qos=None, *args, **kwargs):
         self._logger.debug("Receive mqtt message %s" % (topic))
         if self.baseTopic is None:
             return
 
+        if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, '/connect'):
+
+            self._printer.connect()
+        if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, '/disconnect'):
+            self._printer.disconnect()
+
         # if topic == '%s%s%s' % (self.baseTopic, self.baseTopic, 'env'):
         #     payload = json.loads(message)
-      
+
 
 
     def get_update_information(self):
