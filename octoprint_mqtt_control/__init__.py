@@ -54,7 +54,6 @@ class MQTTControlPlugin(
             return
 
         if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, '/connect'):
-
             self._printer.connect()
         if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, '/disconnect'):
             self._printer.disconnect()
@@ -78,8 +77,16 @@ class MQTTControlPlugin(
                 user="ralmn",
                 repo="OctoPrint-MQTT-Control",
                 current=self._plugin_version,
-                prerelease_branches=["develop"],
-                prerelease=True,
+                stable_branch=dict(
+                    name="Stable", branch="main", comittish=["main"]
+                ),
+                prerelease_branches=[
+                    dict(
+                        name="Unstable / Develop",
+                        branch="develop",
+                        comittish=["develop", "main"],
+                    )
+                ],
 
                 # update method: pip
                 pip="https://github.com/ralmn/OctoPrint-MQTT-Control/archive/{target_version}.zip"
