@@ -90,7 +90,7 @@ class MQTTControlPlugin(
                     motor = motor.lower()
                     if self._printer.is_paused() and motor != "E":
                         return
-                    self._printer.commands("G0 %s%s F%s" % (motor.upper(), distance, speed))
+                    self._printer.commands(["G91", "G0 %s%s F%s" % (motor.upper(), distance, speed)])
 
 
         # if topic == '%s%s%s' % (self.baseTopic, self.baseTopic, 'env'):
