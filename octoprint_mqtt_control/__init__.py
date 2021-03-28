@@ -71,6 +71,27 @@ class MQTTControlPlugin(
                     temp = payload['temp']
                     self._printer.set_temperature('bed', temp)
 
+        if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, "/motor/disable" ):
+            if self._printer.is_operational() or self._printer.is_paused():
+                payload = json.loads(message)
+                if 'motor' in payload:
+                    motor = payload['motor'] # X, Y, Z, E
+                    motor = motor.lower()
+                    if self._printer.is_paused() and motor != "E":
+                        return
+                    self._printer.commands("M18 %s" % motor.upper())
+        if topic == "%s%s%s" % (self.baseTopic, self.topicPrefix, "/motor/move"):
+            if self._printer.is_operational() or self._printer.is_paused():
+                payload = json.loads(message)
+                if 'motor' in payload and 'distance' in payload:
+                    speed = 500
+                    distance = payload ['distance']
+                    motor = payload['motor']  # X, Y, Z, E
+                    motor = motor.lower()
+                    if self._printer.is_paused() and motor != "E":
+                        return
+                    self._printer.commands("G0 %s%s F%s" % (motor.upper(), distance, speed))
+
 
         # if topic == '%s%s%s' % (self.baseTopic, self.baseTopic, 'env'):
         #     payload = json.loads(message)
