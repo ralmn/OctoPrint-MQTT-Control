@@ -85,6 +85,8 @@ class MQTTControlPlugin(
                 payload = json.loads(message)
                 if 'motor' in payload and 'distance' in payload:
                     speed = 500
+                    if 'speed' in payload:
+                        speed = payload['speed']
                     distance = payload ['distance']
                     motor = payload['motor']  # X, Y, Z, E
                     motor = motor.lower()
