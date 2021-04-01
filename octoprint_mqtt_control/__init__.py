@@ -117,8 +117,8 @@ class MQTTControlPlugin(
                 stable_branch=dict(
                     name="Stable", branch="main", comittish=["main"]
                 ),
-                prerelease=True
-                prerelease_channel="develop"
+                prerelease=True,
+                prerelease_channel="develop",
                 prerelease_branches=[
                     dict(
                         name="Unstable / Develop",
