@@ -14,7 +14,7 @@ plugin_package = "octoprint_mqtt_control"
 plugin_name = "OctoPrint MQTT Control"
 
 # The plugin's version. Can be overwritten within OctoPrint's internal data via __plugin_version__ in the plugin module
-plugin_version = "1.0.0-dev4"
+plugin_version = "1.0.0dev5"
 
 
 # The plugin's description. Can be overwritten within OctoPrint's internal data via __plugin_description__ in the plugin
@@ -28,7 +28,7 @@ plugin_author = "Mathieu \"ralmn\" HIREL"
 plugin_author_email = "me@rlm.pw"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/ralmn/OctoPrint-MQTT-control"
+plugin_url = "https://github.com/ralmn/OctoPrint-MQTT-Control"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "AGPLv3"

@@ -117,6 +117,8 @@ class MQTTControlPlugin(
                 stable_branch=dict(
                     name="Stable", branch="main", comittish=["main"]
                 ),
+                prerelease=True
+                prerelease_channel="develop"
                 prerelease_branches=[
                     dict(
                         name="Unstable / Develop",
@@ -126,7 +128,7 @@ class MQTTControlPlugin(
                 ],
 
                 # update method: pip
-                pip="https://github.com/ralmn/OctoPrint-MQTT-Control/archive/{target_version}.zip"
+                pip="https://github.com/ralmn/OctoPrint-MQTT-Control/archive/{target}.zip"
             )
         )
 
