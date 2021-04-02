@@ -90,7 +90,7 @@ class MQTTControlPlugin(
                     distance = payload ['distance']
                     motor = payload['motor']  # X, Y, Z, E
                     motor = motor.lower()
-                    if self._printer.is_paused() and motor != "E":
+                    if self._printer.is_paused() and motor != "e":
                         return
                     self._printer.commands(["G91", "G0 %s%s F%s" % (motor.upper(), distance, speed)])
 
