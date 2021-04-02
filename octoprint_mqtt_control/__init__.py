@@ -128,6 +128,7 @@ class MQTTControlPlugin(
                 ],
 
                 # update method: pip
+                method="pip",
                 pip="https://github.com/ralmn/OctoPrint-MQTT-Control/archive/{target}.zip"
             )
         )
